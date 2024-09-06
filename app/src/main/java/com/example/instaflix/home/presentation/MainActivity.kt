@@ -1,4 +1,4 @@
-package com.example.instaflix
+package com.example.instaflix.home.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
