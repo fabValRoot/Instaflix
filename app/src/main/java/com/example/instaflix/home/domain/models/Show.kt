@@ -1,5 +1,9 @@
 package com.example.instaflix.home.domain.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Show(
     val smallImgPath: String,
     val id: Int,
@@ -11,5 +15,6 @@ data class Show(
     val title: String,
     val voteAverage: Double,
     val name: String,
-    val category: String
-)
+    val category: String,
+    val showType: String
+) : Parcelable
