@@ -27,5 +27,5 @@ Android Native app in Kotlin and using Jetpack Compose.
 
  This App will be structured using a mix from different concepts mainly MVI making use of android Jetpack Compose and its avantages to display information on screens depending on the state. Also concepts from Clean Arquitecture.
 
-## Screenshots 
+## Preview 
 (TODO: add Screens from the app) 
