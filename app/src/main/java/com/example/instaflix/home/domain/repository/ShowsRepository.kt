@@ -6,8 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface ShowsRepository {
 
-    //TODO: this should also include local DB funs it will be added when working on the local DB.
-
     suspend fun getShows(
         showType: String,
         category: String,
@@ -15,4 +13,8 @@ interface ShowsRepository {
         page: Int,
         fromRemote: Boolean
     ): Flow<Resource<List<Show>>>
+
+    suspend fun insertShow(show: Show)
+
+    suspend fun getShowById(id: Int, showType: String, category: String): Show
 }

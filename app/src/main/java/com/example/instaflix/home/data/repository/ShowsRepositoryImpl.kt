@@ -1,5 +1,8 @@
 package com.example.instaflix.home.data.repository
 
+import com.example.instaflix.home.data.local.ShowsDatabase
+import com.example.instaflix.home.data.mappers.toShow
+import com.example.instaflix.home.data.mappers.toShowEntity
 import com.example.instaflix.home.data.remote.api.ShowsApi
 import com.example.instaflix.home.domain.models.Show
 import com.example.instaflix.home.domain.repository.ShowsRepository
@@ -11,11 +14,11 @@ import javax.inject.Singleton
 
 @Singleton
 class ShowsRepositoryImpl @Inject constructor(
-    private val api: ShowsApi
+    private val api: ShowsApi,
+    showsDatabase: ShowsDatabase
 ) : ShowsRepository {
 
-    //TODO: implement methods from the DB when that is added to the repo
-
+    val showDao = showsDatabase.showsDao
 
     override suspend fun getShows(
         showType: String,
@@ -28,22 +31,55 @@ class ShowsRepositoryImpl @Inject constructor(
 
             emit(Resource.Loading(true))
 
+            val localShows = showDao.getShowsByCategoryAndType(category, showType)
+
+            if (localShows.isNotEmpty() && !fromRemote) {
+
+                emit(Resource.Sucess(
+                    data = localShows.map { it.toShow(showType, category) }
+                ))
+
+                emit(Resource.Loading(false))
+                return@flow
+            }
+
             val showList = try {
-                api.getShows(showType, category, apiKey, page)
+                api.getShows(showType, category, apiKey, page).results
             } catch (e: Exception) {
                 e.printStackTrace()
                 emit(Resource.Error("Couldn't load data"))
-                null
+                emit(Resource.Loading(false))
+                return@flow
             }
 
             showList.let { shows ->
                 println("GET SHOWS called ")
-                if (showList != null) {
-                    println(showList.results)
-                }
+                println(showList)
+
+
+                val showEntities = shows.map { it.toShowEntity(
+                    showType = showType,
+                    category = category
+                ) }
+
+                showDao.insertListOfShows(showEntities)
+
+                val showList = shows.map { it.toShow(showType, category) }
+
+                emit(Resource.Sucess(data = showList))
                 emit(Resource.Loading(false))
             }
 
         }
+    }
+
+    override suspend fun insertShow(show: Show) {
+        val showEntity = show.toShowEntity()
+        showDao.insertShow(showEntity)
+    }
+
+
+    override suspend fun getShowById(id: Int, showType: String, category: String): Show {
+        return showDao.getShowById(id).toShow(showType, category)
     }
 }

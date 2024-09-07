@@ -1,5 +1,8 @@
 package com.example.instaflix.di
 
+import android.app.Application
+import androidx.room.Room
+import com.example.instaflix.home.data.local.ShowsDatabase
 import com.example.instaflix.home.data.remote.api.ShowsApi
 import com.example.instaflix.home.data.remote.api.ShowsApi.Companion.BASE_URL
 import dagger.Module
@@ -32,6 +35,16 @@ class AppModule {
             .client(client)
             .build()
             .create(ShowsApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideShowsDatabase(app: Application): ShowsDatabase {
+        return Room.databaseBuilder(
+            app,
+            ShowsDatabase::class.java,
+            "shows_db"
+        ).build()
     }
 
 }
