@@ -43,6 +43,8 @@ fun ShowItem(
             .clip(RoundedCornerShape(8.dp))
             .clickable {
                 //todo: navigate to show detail screen
+                println("CLICK ON ITEM: ${show.id}")
+                navController.navigate("${Routes.SHOW_DETAIL_SCREEN}?id=${show.id}")
             }
     ) {
         if (imgState is AsyncImagePainter.State.Success){
