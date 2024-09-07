@@ -57,10 +57,12 @@ class ShowsRepositoryImpl @Inject constructor(
                 println(showList)
 
 
-                val showEntities = shows.map { it.toShowEntity(
-                    showType = showType,
-                    category = category
-                ) }
+                val showEntities = shows.map {
+                    it.toShowEntity(
+                        showType = showType,
+                        category = category
+                    )
+                }
 
                 showDao.insertListOfShows(showEntities)
 
@@ -79,7 +81,22 @@ class ShowsRepositoryImpl @Inject constructor(
     }
 
 
-    override suspend fun getShowById(id: Int, showType: String, category: String): Show {
-        return showDao.getShowById(id).toShow(showType, category)
+    override suspend fun getShowById(
+        id: Int,
+        showType: String,
+        category: String
+    ): Flow<Resource<Show>> {
+        return flow {
+
+            emit(Resource.Loading(true))
+
+            val localShow = showDao.getShowById(id)
+
+            emit(Resource.Sucess(data = localShow.toShow(showType, category)))
+            emit(Resource.Loading(false))
+
+            return@flow
+        }
+
     }
 }

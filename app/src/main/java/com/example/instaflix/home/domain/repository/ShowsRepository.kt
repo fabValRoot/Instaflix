@@ -16,5 +16,5 @@ interface ShowsRepository {
 
     suspend fun insertShow(show: Show)
 
-    suspend fun getShowById(id: Int, showType: String, category: String): Show
+    suspend fun getShowById(id: Int, showType: String, category: String): Flow<Resource<Show>>
 }

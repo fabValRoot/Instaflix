@@ -5,16 +5,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.instaflix.detail.presentation.ShowDetailScreen
+import com.example.instaflix.detail.presentation.ShowDetailsViewModel
 import com.example.instaflix.ui.theme.InstaflixTheme
 import com.example.instaflix.util.Routes
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,44 +29,70 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             InstaflixTheme {
-//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//                    Greeting(
-//                        name = "Android",
-//                        modifier = Modifier.padding(innerPadding),
-//                        viewModel = viewModel
-//                    )
-//                }
 
                 val viewModel: HomeViewModel by viewModels()
                 val state = viewModel.state.collectAsState().value
 
-                HomeNav(state = state)
+                val detailsViewModel: ShowDetailsViewModel by viewModels()
+
+
+                HomeNav(
+                    state = state,
+                    detailsViewModel = detailsViewModel
+                )
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier, viewModel: HomeViewModel) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
 @Composable
 fun HomeNav(
     state: HomeState,
+    detailsViewModel: ShowDetailsViewModel
 ) {
     val navController = rememberNavController()
+
+    val detailState = detailsViewModel.showDetailState.collectAsState().value
 
     NavHost(
         navController = navController,
         startDestination = Routes.HOME_SCREEN
-    ){
+    ) {
 
         composable(Routes.HOME_SCREEN) {
             HomeScreen(navController = navController, state = state)
+        }
+
+        composable(
+            "${Routes.SHOW_DETAIL_SCREEN}?id={id}",
+            arguments = listOf(
+                navArgument("id") {
+                    type = NavType.IntType
+                }
+            )
+        ) {
+
+            val id = it.arguments?.getInt("id") ?: 0
+
+            LaunchedEffect(key1 = true) {
+                detailsViewModel.fetchShowDetails(id)
+            }
+
+            if (detailState.isLoading){
+                println("LOADING DETAILSCREEN")
+            }
+            if (detailState.error != null){
+                println("ERROR DETAILSCREEN")
+            }
+            if (detailState.show != null){
+                ShowDetailScreen(
+                    navController = navController,
+                    show = detailState.show,
+                    detailState = detailState
+                )
+            }
+
         }
 
     }
