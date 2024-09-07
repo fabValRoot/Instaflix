@@ -50,7 +50,23 @@ fun ShowDetailScreen(
             ShowPosterComposable(show = show)
 
             Text(
-                text = show.showType,
+                text = "${show.showType} / ${show.category}",
+                color = MaterialTheme.colorScheme.onBackground,
+                fontSize = 20.sp
+            )
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Text(
+                text = "${show.title}${show.name}",
+                color = MaterialTheme.colorScheme.onBackground,
+                fontSize = 20.sp
+            )
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Text(
+                text = show.language,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 20.sp
             )

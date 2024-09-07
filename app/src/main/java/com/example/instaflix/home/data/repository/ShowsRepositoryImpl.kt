@@ -36,7 +36,7 @@ class ShowsRepositoryImpl @Inject constructor(
             if (localShows.isNotEmpty() && !fromRemote) {
 
                 emit(Resource.Sucess(
-                    data = localShows.map { it.toShow(showType, category) }
+                    data = localShows.map { it.toShow() }
                 ))
 
                 emit(Resource.Loading(false))
@@ -53,9 +53,6 @@ class ShowsRepositoryImpl @Inject constructor(
             }
 
             showList.let { shows ->
-                println("GET SHOWS called ")
-                println(showList)
-
 
                 val showEntities = shows.map {
                     it.toShowEntity(
@@ -92,7 +89,7 @@ class ShowsRepositoryImpl @Inject constructor(
 
             val localShow = showDao.getShowById(id)
 
-            emit(Resource.Sucess(data = localShow.toShow(showType, category)))
+            emit(Resource.Sucess(data = localShow.toShow()))
             emit(Resource.Loading(false))
 
             return@flow
