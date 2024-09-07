@@ -4,9 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.CircularProgressIndicator
@@ -15,7 +13,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
@@ -31,14 +28,14 @@ import com.example.instaflix.home.domain.models.Show
 
 
 @Composable
-fun ShowItem(
+fun HomeScreenItem(
     show: Show,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
 
 
-    val imgUrl = "${ShowsApi.IMAGE_URL}${show.smallImgPath}"
+    val imgUrl = "${ShowsApi.IMAGE_URL}${show.largeImgPath}"
 
     val imgPainter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
@@ -51,8 +48,6 @@ fun ShowItem(
 
     Box(
         modifier = modifier
-            .padding(5.dp)
-            .clip(RoundedCornerShape(8.dp))
             .clickable {
                 navController.navigate("${Routes.SHOW_DETAIL_SCREEN}?id=${show.id}")
             }

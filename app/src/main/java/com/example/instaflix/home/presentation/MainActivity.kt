@@ -84,9 +84,7 @@ fun HomeNav(
             }
             if (detailState.show != null) {
                 ShowDetailScreen(
-                    navController = navController,
                     show = detailState.show,
-                    detailState = detailState
                 )
             }
 

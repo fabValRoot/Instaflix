@@ -8,11 +8,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
@@ -42,14 +38,15 @@ fun ShowPosterComposable(
     val posterState = posterPainter.state
 
 
-    Column {
-        Spacer(modifier = Modifier.height(200.dp))
-
+    Column(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Card(
             modifier = Modifier
-                .width(180.dp)
-                .height(250.dp)
-                .padding(start = 16.dp),
+                .fillMaxSize()
+                .align(Alignment.CenterHorizontally),
             shape = RoundedCornerShape(2.dp),
             elevation = CardDefaults.cardElevation(5.dp)
         ) {
