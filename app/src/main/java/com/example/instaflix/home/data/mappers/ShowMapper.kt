@@ -4,10 +4,7 @@ import com.example.instaflix.home.data.local.ShowEntity
 import com.example.instaflix.home.data.remote.dto.ShowDTo
 import com.example.instaflix.home.domain.models.Show
 
-fun ShowEntity.toShow(
-    showType: String,
-    category: String
-): Show {
+fun ShowEntity.toShow(): Show {
     return Show(
         smallImgPath = smallImgPath,
         id = id,

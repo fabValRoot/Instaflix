@@ -22,8 +22,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    //private val viewModel: HomeViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -34,7 +32,6 @@ class MainActivity : ComponentActivity() {
                 val state = viewModel.state.collectAsState().value
 
                 val detailsViewModel: ShowDetailsViewModel by viewModels()
-
 
                 HomeNav(
                     state = state,
@@ -79,13 +76,13 @@ fun HomeNav(
                 detailsViewModel.fetchShowDetails(id)
             }
 
-            if (detailState.isLoading){
+            if (detailState.isLoading) {
                 println("LOADING DETAILSCREEN")
             }
-            if (detailState.error != null){
+            if (detailState.error != null) {
                 println("ERROR DETAILSCREEN")
             }
-            if (detailState.show != null){
+            if (detailState.show != null) {
                 ShowDetailScreen(
                     navController = navController,
                     show = detailState.show,
