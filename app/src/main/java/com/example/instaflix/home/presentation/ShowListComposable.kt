@@ -1,6 +1,5 @@
 package com.example.instaflix.home.presentation
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,15 +32,19 @@ fun ShowListComposable(
             when (category) {
                 "popular" -> state.popularMovies.take(10)
                 "top_rated" -> state.topRatedMovies.take(10)
-                else -> {state.popularMovies.take(10)}
+                else -> {
+                    state.popularMovies.take(10)
+                }
             }
         }
 
-        "tv"-> {
+        "tv" -> {
             when (category) {
                 "airing_today" -> state.airTodayTvShows.take(10)
                 "on_the_air" -> state.onAirTvShows.take(10)
-                else -> {state.popularMovies.take(10)}
+                else -> {
+                    state.popularMovies.take(10)
+                }
             }
         }
 
@@ -51,14 +54,17 @@ fun ShowListComposable(
     }
 
     Column {
-        Row (
-            modifier = Modifier.fillMaxWidth()
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 0.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
-        ){
+        ) {
             Text(
-                text = "$showType  $category",
+                text = "${showType.uppercase()}/${
+                    category.split("_").joinToString(" ").uppercase()
+                }",
                 color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 20.sp
             )
