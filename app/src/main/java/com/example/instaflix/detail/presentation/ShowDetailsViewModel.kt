@@ -20,19 +20,24 @@ class ShowDetailsViewModel @Inject constructor(
     private val _showDetailState = MutableStateFlow(ShowDetailState())
     val showDetailState = _showDetailState.asStateFlow()
 
-
-    fun fetchShowDetails(id : Int) {
+    fun fetchShowDetails(id: Int) {
         viewModelScope.launch {
 
-            showRepository.getShowById(id,"","")
+            showRepository.getShowById(id, "", "")
                 .collect { result ->
                     when (result) {
-                        is Resource.Error -> TODO()
+                        is Resource.Error -> {
+                            _showDetailState.value = showDetailState.value.copy(
+                                error = result.message
+                            )
+                        }
+
                         is Resource.Loading -> {
                             _showDetailState.value = showDetailState.value.copy(
                                 isLoading = result.isLoading
                             )
                         }
+
                         is Resource.Sucess -> {
                             _showDetailState.value = showDetailState.value.copy(
                                 show = result.data
@@ -41,7 +46,6 @@ class ShowDetailsViewModel @Inject constructor(
                     }
 
                 }
-
 
         }
     }

@@ -16,6 +16,7 @@ import androidx.navigation.navArgument
 import com.example.instaflix.detail.presentation.ShowDetailScreen
 import com.example.instaflix.detail.presentation.ShowDetailsViewModel
 import com.example.instaflix.ui.theme.InstaflixTheme
+import com.example.instaflix.util.ErrorComposable
 import com.example.instaflix.util.Routes
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -76,16 +77,12 @@ fun HomeNav(
                 detailsViewModel.fetchShowDetails(id)
             }
 
-            if (detailState.isLoading) {
-                println("LOADING DETAILSCREEN")
-            }
-            if (detailState.error != null) {
-                println("ERROR DETAILSCREEN")
-            }
             if (detailState.show != null) {
                 ShowDetailScreen(
                     show = detailState.show,
                 )
+            } else {
+                ErrorComposable(message = "Show Not Found, Retry")
             }
 
         }

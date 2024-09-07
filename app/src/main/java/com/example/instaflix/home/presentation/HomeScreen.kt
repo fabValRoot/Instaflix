@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.instaflix.util.ErrorComposable
 import com.example.instaflix.util.HomeScreenItem
 
 @Composable
@@ -41,6 +42,12 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .height(500.dp)
             ) {
+
+                if (state.error != null) {
+                    ErrorComposable(
+                        message = state.error,
+                    )
+                }
 
                 if (state.popularMovies.isEmpty() || state.isLoading) {
                     CircularProgressIndicator(
