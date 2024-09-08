@@ -86,5 +86,8 @@ dependencies {
 
     implementation(libs.coil.compose)
 
+    implementation(libs.accompanist.navigation.animation)
+
+
 }
 

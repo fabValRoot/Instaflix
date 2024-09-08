@@ -8,6 +8,6 @@ import androidx.room.RoomDatabase
     version = 1
 )
 
-abstract class ShowsDatabase: RoomDatabase() {
+abstract class ShowsDatabase : RoomDatabase() {
     abstract val showsDao: ShowsDao
 }

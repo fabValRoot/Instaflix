@@ -26,7 +26,6 @@ class AppModule {
 
     private val client: OkHttpClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
-
     @Provides
     @Singleton
     fun provideShowsApi(): ShowsApi {

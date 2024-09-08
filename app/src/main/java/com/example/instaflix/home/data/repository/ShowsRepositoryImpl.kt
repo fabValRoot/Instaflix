@@ -9,6 +9,8 @@ import com.example.instaflix.home.domain.repository.ShowsRepository
 import com.example.instaflix.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import okio.IOException
+import retrofit2.HttpException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -45,6 +47,16 @@ class ShowsRepositoryImpl @Inject constructor(
 
             val showList = try {
                 api.getShows(showType, category, apiKey, page).results
+            } catch (e: IOException) {
+                e.printStackTrace()
+                emit(Resource.Error("Couldn't load data IO Exception"))
+                emit(Resource.Loading(false))
+                return@flow
+            } catch (e: HttpException) {
+                e.printStackTrace()
+                emit(Resource.Error("Couldn't load data Http Exception"))
+                emit(Resource.Loading(false))
+                return@flow
             } catch (e: Exception) {
                 e.printStackTrace()
                 emit(Resource.Error("Couldn't load data"))
@@ -76,7 +88,6 @@ class ShowsRepositoryImpl @Inject constructor(
         val showEntity = show.toShowEntity()
         showDao.insertShow(showEntity)
     }
-
 
     override suspend fun getShowById(
         id: Int,

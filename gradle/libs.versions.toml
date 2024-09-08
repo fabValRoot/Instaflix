@@ -1,4 +1,5 @@
 [versions]
+accompanistNavigationAnimation = "0.31.0-alpha"
 agp = "8.5.2"
 coilCompose = "2.5.0"
 converterGson = "2.9.0"
@@ -25,6 +26,7 @@ roomKtx = "2.6.1"
 navigationCompose = "2.8.0"
 
 [libraries]
+accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanistNavigationAnimation" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltNavigationCompose" }
 androidx-hilt-compiler-v110 = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompilerVersion" }
