@@ -3,6 +3,7 @@ package com.example.instaflix.home.presentation
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.instaflix.R
 import com.example.instaflix.home.data.remote.api.ShowsApi.Companion.API_KEY
 import com.example.instaflix.home.domain.repository.ShowsRepository
 import com.example.instaflix.util.Resource
@@ -27,10 +28,10 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            fetchShows("movie", "popular")
-            fetchShows("movie", "top_rated")
-            fetchShows("tv", "airing_today")
-            fetchShows("tv", "on_the_air")
+            fetchShows(context.getString(R.string.movie), context.getString(R.string.popular))
+            fetchShows(context.getString(R.string.movie), context.getString(R.string.top_rated))
+            fetchShows(context.getString(R.string.tv), context.getString(R.string.airing_today))
+            fetchShows(context.getString(R.string.tv), context.getString(R.string.on_the_air))
         }
     }
 
@@ -49,16 +50,29 @@ class HomeViewModel @Inject constructor(
                 is Resource.Error -> {
                     _state.update { it.copy(error = result.message) }
                 }
+
                 is Resource.Loading -> {
                     _state.update { it.copy(isLoading = result.isLoading) }
                 }
+
                 is Resource.Sucess -> {
                     _state.update {
                         when (category) {
-                            "popular" -> it.copy(popularMovies = result.data ?: emptyList())
-                            "top_rated" -> it.copy(topRatedMovies = result.data ?: emptyList())
-                            "airing_today" -> it.copy(airTodayTvShows = result.data ?: emptyList())
-                            "on_the_air" -> it.copy(onAirTvShows = result.data ?: emptyList())
+                            context.getString(R.string.popular) -> it.copy(
+                                popularMovies = result.data ?: emptyList()
+                            )
+
+                            context.getString(R.string.top_rated) -> it.copy(
+                                topRatedMovies = result.data ?: emptyList()
+                            )
+
+                            context.getString(R.string.airing_today) -> it.copy(
+                                airTodayTvShows = result.data ?: emptyList()
+                            )
+
+                            context.getString(R.string.on_the_air) -> it.copy(
+                                onAirTvShows = result.data ?: emptyList()
+                            )
 
                             else -> {
                                 it.copy()

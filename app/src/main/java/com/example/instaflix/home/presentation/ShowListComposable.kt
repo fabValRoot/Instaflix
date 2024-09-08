@@ -13,9 +13,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.instaflix.R
 import com.example.instaflix.util.ShowItem
 
 
@@ -28,20 +30,20 @@ fun ShowListComposable(
 ) {
 
     val showsList = when (showType) {
-        "movie" -> {
+        stringResource(R.string.movie) -> {
             when (category) {
-                "popular" -> state.popularMovies.take(10)
-                "top_rated" -> state.topRatedMovies.take(10)
+                stringResource(R.string.popular) -> state.popularMovies.take(10)
+                stringResource(R.string.top_rated) -> state.topRatedMovies.take(10)
                 else -> {
                     state.popularMovies.take(10)
                 }
             }
         }
 
-        "tv" -> {
+        stringResource(R.string.tv) -> {
             when (category) {
-                "airing_today" -> state.airTodayTvShows.take(10)
-                "on_the_air" -> state.onAirTvShows.take(10)
+                stringResource(R.string.airing_today) -> state.airTodayTvShows.take(10)
+                stringResource(R.string.on_the_air) -> state.onAirTvShows.take(10)
                 else -> {
                     state.popularMovies.take(10)
                 }

@@ -11,18 +11,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ErrorComposable(message: String){
+fun ErrorComposable(message: String) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.error),
         contentAlignment = Alignment.Center
-    ){
+    ) {
         Text(
             text = message,
             color = MaterialTheme.colorScheme.onError,
             fontSize = 20.sp
-
         )
 
     }

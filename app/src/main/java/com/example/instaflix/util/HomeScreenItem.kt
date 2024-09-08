@@ -17,12 +17,14 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
 import androidx.navigation.NavController
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.example.instaflix.R
 import com.example.instaflix.home.data.remote.api.ShowsApi
 import com.example.instaflix.home.domain.models.Show
 
@@ -80,7 +82,7 @@ fun HomeScreenItem(
                     .size(100.dp)
                     .align(Alignment.Center),
                 imageVector = Icons.Rounded.Warning,
-                contentDescription = "Error loading image"
+                contentDescription = stringResource(R.string.error_loading_image)
             )
         }
     }
