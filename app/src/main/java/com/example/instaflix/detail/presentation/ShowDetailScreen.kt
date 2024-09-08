@@ -12,8 +12,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.instaflix.R
 import com.example.instaflix.home.domain.models.Show
 import com.example.instaflix.util.ShowPosterComposable
 
@@ -42,7 +44,7 @@ fun ShowDetailScreen(
             )
             {
                 Text(
-                    text = "Title: ${show.title}${show.name}",
+                    text = stringResource(R.string.title, show.title, show.name),
                     color = MaterialTheme.colorScheme.onBackground,
                     fontSize = 22.sp
                 )
@@ -50,7 +52,7 @@ fun ShowDetailScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Show Type: ${show.showType}",
+                    text = stringResource(R.string.show_type, show.showType),
                     color = MaterialTheme.colorScheme.onBackground,
                     fontSize = 18.sp
                 )
@@ -58,7 +60,7 @@ fun ShowDetailScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Category: ${show.category}",
+                    text = stringResource(R.string.category, show.category),
                     color = MaterialTheme.colorScheme.onBackground,
                     fontSize = 18.sp
                 )
@@ -66,7 +68,7 @@ fun ShowDetailScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Language: ${show.language}",
+                    text = stringResource(R.string.language, show.language),
                     color = MaterialTheme.colorScheme.onBackground,
                     fontSize = 14.sp
                 )
@@ -74,7 +76,7 @@ fun ShowDetailScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Release Date: ${show.releaseDate}",
+                    text = stringResource(R.string.release_date, show.releaseDate),
                     color = MaterialTheme.colorScheme.onBackground,
                     fontSize = 14.sp
                 )
@@ -82,7 +84,7 @@ fun ShowDetailScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Overview: ${show.overview}",
+                    text = stringResource(R.string.overview, show.overview),
                     color = MaterialTheme.colorScheme.onBackground,
                     fontSize = 12.sp
                 )

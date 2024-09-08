@@ -8,4 +8,10 @@
     <string name="airing_today">airing_today</string>
     <string name="on_the_air">on_the_air</string>
     <string name="show_not_found_retry">Show Not Found, Retry</string>
+    <string name="overview">Overview: %1$s</string>
+    <string name="release_date">Release Date: %1$s</string>
+    <string name="language">Language: %1$s</string>
+    <string name="category">Category: %1$s</string>
+    <string name="show_type">Show Type: %1$s</string>
+    <string name="title">Title: %1$s%2$s</string>
 </resources>
