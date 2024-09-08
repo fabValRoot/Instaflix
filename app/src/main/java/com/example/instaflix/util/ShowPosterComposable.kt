@@ -3,12 +3,9 @@ package com.example.instaflix.util
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Warning
@@ -24,12 +21,14 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
+import com.example.instaflix.R
 import com.example.instaflix.home.data.remote.api.ShowsApi
 import com.example.instaflix.home.domain.models.Show
 
@@ -93,7 +92,7 @@ fun ShowPosterComposable(
                             .fillMaxSize()
                             .align(Alignment.Center),
                         imageVector = Icons.Rounded.Warning,
-                        contentDescription = "Error loading image"
+                        contentDescription = stringResource(R.string.error_loading_image)
                     )
 
                 }

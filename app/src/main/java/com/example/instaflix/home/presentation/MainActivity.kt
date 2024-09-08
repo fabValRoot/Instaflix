@@ -10,11 +10,13 @@ import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.instaflix.R
 import com.example.instaflix.detail.presentation.ShowDetailScreen
 import com.example.instaflix.detail.presentation.ShowDetailsViewModel
 import com.example.instaflix.ui.theme.InstaflixTheme
@@ -134,7 +136,7 @@ fun HomeNav(
                     show = detailState.show,
                 )
             } else {
-                ErrorComposable(message = "Show Not Found, Retry")
+                ErrorComposable(message = stringResource(R.string.show_not_found_retry))
             }
 
         }

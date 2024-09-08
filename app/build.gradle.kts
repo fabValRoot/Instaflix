@@ -17,7 +17,8 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        testInstrumentationRunner = "com.example.instaflix.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -63,6 +64,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.junit.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -88,6 +90,42 @@ dependencies {
 
     implementation(libs.accompanist.navigation.animation)
 
+    // Unit Testing
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito.mockito.core)
+    testImplementation(libs.kotlin.mockito.kotlin)
+    testImplementation(libs.kotlinx.coroutines.test.v152)
+    testImplementation(libs.androidx.core.testing.v210 )
+
+    // Mockito with Kotlin
+    testImplementation( libs.mockitokotlin2.mockito.kotlin)
+
+    // AndroidX Test
+    testImplementation(libs.androidx.junit)
+    testImplementation(libs.core)
+
+    // Room Test Helpers
+    testImplementation(libs.androidx.room.testing.v250)
+
+    // Android Instrumented Testing
+    androidTestImplementation(libs.androidx.runner)
+    androidTestImplementation(libs.androidx.junit.v113)
+    androidTestImplementation(libs.androidx.espresso.core.v340)
+
+    // Room and ViewModel Instrumented Testing
+    androidTestImplementation(libs.androidx.core.testing)
+    androidTestImplementation(libs.androidx.room.testing)
+
+    // Instrumentation for Coroutines
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+
+    // Jetpack Compose Testing
+    androidTestImplementation(libs.ui.test.junit4)
+
+    // For instrumented tests.
+    androidTestImplementation(libs.hilt.android.testing)
+    // ...with Kotlin.
+    kaptAndroidTest(libs.hilt.android.compiler)
 
 }
 
