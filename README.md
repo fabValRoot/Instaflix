@@ -2,6 +2,8 @@
 
 Android Native app in Kotlin and using Jetpack Compose. 
 
+***NOTE: Please check closed PRs to understand the process during the development***
+
 ## Features 
 
 - View Movies Catalog from at leat two categories.
