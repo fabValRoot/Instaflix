@@ -1,6 +1,6 @@
 package com.example.instaflix.detail.presentation
 
-import com.example.instaflix.home.domain.models.Show
+import com.example.instaflix.core.domain.models.Show
 
 data class ShowDetailState(
 

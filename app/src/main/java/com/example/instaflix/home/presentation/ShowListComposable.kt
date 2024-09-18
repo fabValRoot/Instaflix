@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.instaflix.R
-import com.example.instaflix.util.ShowItem
+import com.example.instaflix.core.util.ShowItem
 
 
 @Composable

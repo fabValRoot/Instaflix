@@ -4,10 +4,9 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.instaflix.R
-import com.example.instaflix.home.data.remote.api.ShowsApi.Companion.API_KEY
-import com.example.instaflix.home.domain.repository.ShowsRepository
-import com.example.instaflix.util.Resource
-import com.example.instaflix.util.isInternetAvailable
+import com.example.instaflix.core.util.Resource
+import com.example.instaflix.core.util.isInternetAvailable
+import com.example.instaflix.home.domain.use_cases.GetShows
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val showRepository: ShowsRepository,
+    private val showsUseCase: GetShows,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
@@ -39,11 +38,10 @@ class HomeViewModel @Inject constructor(
         showType: String,
         category: String,
     ) {
-        showRepository.getShows(
+        showsUseCase(
             showType = showType,
             category = category,
             page = 1,
-            apiKey = API_KEY,
             fromRemote = isInternetAvailable(context),
         ).collect { result ->
             when (result) {

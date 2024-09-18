@@ -16,8 +16,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.instaflix.R
-import com.example.instaflix.home.domain.models.Show
-import com.example.instaflix.util.ShowPosterComposable
+import com.example.instaflix.core.domain.models.Show
+import com.example.instaflix.core.util.ShowPosterComposable
 
 
 @Composable
