@@ -3,7 +3,6 @@ package com.example.instaflix.home.presentation
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.instaflix.R
 import com.example.instaflix.core.util.Resource
 import com.example.instaflix.core.util.isInternetAvailable
 import com.example.instaflix.home.domain.use_cases.GetShows
@@ -27,14 +26,14 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            fetchShows(context.getString(R.string.movie), context.getString(R.string.popular))
-            fetchShows(context.getString(R.string.movie), context.getString(R.string.top_rated))
-            fetchShows(context.getString(R.string.tv), context.getString(R.string.airing_today))
-            fetchShows(context.getString(R.string.tv), context.getString(R.string.on_the_air))
+            fetchShows(MOVIE_TYPE, POPULAR_CATEGORY,)
+            fetchShows(MOVIE_TYPE, TOP_RATED_CATEGORY)
+            fetchShows(TV_TYPE, AIRING_TODAY_CATEGORY)
+            fetchShows(TV_TYPE, ON_THE_AIR_CATEGORY)
         }
     }
 
-    private suspend fun fetchShows(
+    suspend fun fetchShows(
         showType: String,
         category: String,
     ) {
@@ -56,19 +55,19 @@ class HomeViewModel @Inject constructor(
                 is Resource.Sucess -> {
                     _state.update {
                         when (category) {
-                            context.getString(R.string.popular) -> it.copy(
+                            POPULAR_CATEGORY -> it.copy(
                                 popularMovies = result.data ?: emptyList()
                             )
 
-                            context.getString(R.string.top_rated) -> it.copy(
+                            TOP_RATED_CATEGORY -> it.copy(
                                 topRatedMovies = result.data ?: emptyList()
                             )
 
-                            context.getString(R.string.airing_today) -> it.copy(
+                            AIRING_TODAY_CATEGORY -> it.copy(
                                 airTodayTvShows = result.data ?: emptyList()
                             )
 
-                            context.getString(R.string.on_the_air) -> it.copy(
+                            ON_THE_AIR_CATEGORY-> it.copy(
                                 onAirTvShows = result.data ?: emptyList()
                             )
 
@@ -80,6 +79,15 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    companion object {
+        const val MOVIE_TYPE = "movie"
+        const val TV_TYPE = "tv"
+        const val POPULAR_CATEGORY = "popular"
+        const val TOP_RATED_CATEGORY = "top_rated"
+        const val AIRING_TODAY_CATEGORY = "airing_today"
+        const val ON_THE_AIR_CATEGORY = "on_the_air"
     }
 
 

@@ -8,7 +8,10 @@ import com.example.instaflix.core.domain.repository.ShowsRepository
 import com.example.instaflix.core.util.Resource
 import com.example.instaflix.core.data.mappers.toShow
 import com.example.instaflix.core.data.mappers.toShowEntity
+import com.example.instaflix.core.util.isInternetAvailable
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.coroutineContext
 import kotlinx.coroutines.flow.flow
 import okio.IOException
 import retrofit2.HttpException

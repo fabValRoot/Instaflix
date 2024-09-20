@@ -19,6 +19,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.instaflix.R
 import com.example.instaflix.core.util.ShowItem
+import com.example.instaflix.home.presentation.HomeViewModel.Companion.AIRING_TODAY_CATEGORY
+import com.example.instaflix.home.presentation.HomeViewModel.Companion.MOVIE_TYPE
+import com.example.instaflix.home.presentation.HomeViewModel.Companion.ON_THE_AIR_CATEGORY
+import com.example.instaflix.home.presentation.HomeViewModel.Companion.POPULAR_CATEGORY
+import com.example.instaflix.home.presentation.HomeViewModel.Companion.TOP_RATED_CATEGORY
+import com.example.instaflix.home.presentation.HomeViewModel.Companion.TV_TYPE
 
 
 @Composable
@@ -30,20 +36,20 @@ fun ShowListComposable(
 ) {
 
     val showsList = when (showType) {
-        stringResource(R.string.movie) -> {
+        MOVIE_TYPE -> {
             when (category) {
-                stringResource(R.string.popular) -> state.popularMovies.take(10)
-                stringResource(R.string.top_rated) -> state.topRatedMovies.take(10)
+                POPULAR_CATEGORY -> state.popularMovies.take(10)
+                TOP_RATED_CATEGORY -> state.topRatedMovies.take(10)
                 else -> {
                     state.popularMovies.take(10)
                 }
             }
         }
 
-        stringResource(R.string.tv) -> {
+        TV_TYPE -> {
             when (category) {
-                stringResource(R.string.airing_today) -> state.airTodayTvShows.take(10)
-                stringResource(R.string.on_the_air) -> state.onAirTvShows.take(10)
+                AIRING_TODAY_CATEGORY -> state.airTodayTvShows.take(10)
+                ON_THE_AIR_CATEGORY -> state.onAirTvShows.take(10)
                 else -> {
                     state.popularMovies.take(10)
                 }
